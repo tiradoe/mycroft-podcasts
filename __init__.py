@@ -1,4 +1,6 @@
 from mycroft import MycroftSkill, intent_file_handler
+import feedparser
+from mygpoclient import public
 
 
 class Podcasts(MycroftSkill):
@@ -7,7 +9,11 @@ class Podcasts(MycroftSkill):
 
     @intent_file_handler('podcasts.intent')
     def handle_podcasts(self, message):
-        self.speak_dialog('podcasts')
+        client = public.PublicClient()
+        toplist = client.get_toplist()
+
+        for index, entry in enumerate(toplist):
+            self.speak_dialog(entry.title)
 
 
 def create_skill():
