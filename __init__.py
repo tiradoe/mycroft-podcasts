@@ -20,6 +20,6 @@ class Podcasts(MycroftSkill):
     def handle_playback(self, message):
         pass
 
+
 def create_skill():
     return Podcasts()
-
